@@ -126,7 +126,6 @@ airmass_std_i = [photrep_dict_alltracts[key]['i']['airmass']['std'] for key in p
 airmass_ct_i = [photrep_dict_alltracts[key]['i']['airmass']['count'] for key in photrep_dict_alltracts.keys()]
 airmass_bins = photrep_dict_alltracts[key0]['r']['airmass']['bins']
 
-# plt.style.use('tableau-colorblind10')
 params = {'axes.labelsize': 24,
           'font.size': 20,
           'legend.fontsize': 9,
@@ -150,11 +149,13 @@ params = {'axes.labelsize': 24,
           'figure.facecolor': 'White'}
 plt.rcParams.update(params)
 
+nvisits_min = 20
+
 # for seeing_stats in seeing_std_r:
 for i in range(len(seeing_std_r)):
     seeing_stats = seeing_std_r[i]
     seeing_counts = seeing_ct_r[i]
-    okbins = (np.array(seeing_counts) > 30)
+    okbins = (np.array(seeing_counts) > nvisits_min)
     # import pdb; pdb.set_trace()
     tract_number = keylist[i]
 
@@ -165,19 +166,19 @@ for i in range(len(seeing_std_r)):
 
 plt.xlabel('seeing')
 plt.ylabel('photometric repeatability (mmag)')
-plt.title('r-band; S/N>50, nvisits>30')
+plt.title('r-band; S/N>50, nvisits>'+str(nvisits_min))
 plt.minorticks_on()
 plt.xlim(0.38, 2.18)
 plt.ylim(2, 18)
 plt.legend(ncol=4)
 
-plt.savefig('photrep_seeing_rband_alltracts.png')
+plt.savefig('comcamsim_photrep_seeing_rband_alltracts.png')
 plt.close()
 
 for i in range(len(seeing_std_i)):
     seeing_stats = seeing_std_i[i]
     seeing_counts = seeing_ct_i[i]
-    okbins = (np.array(seeing_counts) > 30)
+    okbins = (np.array(seeing_counts) > nvisits_min)
     # import pdb; pdb.set_trace()
     tract_number = keylist[i]
 
@@ -188,19 +189,19 @@ for i in range(len(seeing_std_i)):
 
 plt.xlabel('seeing')
 plt.ylabel('photometric repeatability (mmag)')
-plt.title('i-band; S/N>50, nvisits>30')
+plt.title('i-band; S/N>50, nvisits>'+str(nvisits_min))
 plt.minorticks_on()
 plt.xlim(0.38, 2.18)
 plt.ylim(2, 18)
 plt.legend(ncol=4)
 
-plt.savefig('photrep_seeing_iband_alltracts.png')
+plt.savefig('comcamsim_photrep_seeing_iband_alltracts.png')
 plt.close()
 
 for i in range(len(airmass_std_r)):
     airmass_stats = airmass_std_r[i]
     airmass_counts = airmass_ct_r[i]
-    okbins = (np.array(airmass_counts) > 30)
+    okbins = (np.array(airmass_counts) > nvisits_min)
     tract_number = keylist[i]
 
     randcolor = (np.random.random(), np.random.random(), np.random.random())
@@ -210,19 +211,19 @@ for i in range(len(airmass_std_r)):
 
 plt.xlabel('airmass')
 plt.ylabel('photometric repeatability (mmag)')
-plt.title('r-band; S/N>50, nvisits>30')
+plt.title('r-band; S/N>50, nvisits>'+str(nvisits_min))
 plt.minorticks_on()
 plt.xlim(1.0, 2.3)
 plt.ylim(2, 18)
 plt.legend(ncol=4)
 
-plt.savefig('photrep_airmass_rband_alltracts.png')
+plt.savefig('comcamsim_photrep_airmass_rband_alltracts.png')
 plt.close()
 
 for i in range(len(airmass_std_i)):
     airmass_stats = airmass_std_i[i]
     airmass_counts = airmass_ct_i[i]
-    okbins = (np.array(airmass_counts) > 30)
+    okbins = (np.array(airmass_counts) > nvisits_min)
     tract_number = keylist[i]
 
     randcolor = (np.random.random(), np.random.random(), np.random.random())
@@ -232,12 +233,12 @@ for i in range(len(airmass_std_i)):
 
 plt.xlabel('airmass')
 plt.ylabel('photometric repeatability (mmag)')
-plt.title('i-band; S/N>50, nvisits>30')
+plt.title('i-band; S/N>50, nvisits>'+str(nvisits_min))
 plt.minorticks_on()
 plt.xlim(1.0, 2.3)
 plt.ylim(2, 18)
 plt.legend(ncol=4)
 
-plt.savefig('photrep_airmass_iband_alltracts.png')
+plt.savefig('comcamsim_photrep_airmass_iband_alltracts.png')
 plt.close()
 
